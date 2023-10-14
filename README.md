@@ -11,8 +11,8 @@ $go test ./... -bench=. -run=none
 goos: darwin
 goarch: arm64
 pkg: github.com/makasim/jsontomsgp
-BenchmarkCopyJSONToMsgp-10    	 1631688	       735.4 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCopyJSONToMsgp-10    	 2112625	       562.5 ns/op	       0 B/op	       0 allocs/op
 PASS
-ok  	github.com/makasim/jsontomsgp	2.135s
+ok  	github.com/makasim/jsontomsgp	1.939s
 ```
 

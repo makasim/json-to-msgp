@@ -26,12 +26,14 @@ func CopyBytes(src []byte, w *msgp.Writer) error {
 		return err
 	}
 
+	if err := w.Flush(); err != nil {
+		return err
+	}
+
 	return nil
 }
 
 func convertV(v *fastjson.Value, w *msgp.Writer) error {
-	defer w.Flush()
-
 	switch v.Type() {
 	case fastjson.TypeObject:
 		objV, err := v.Object()
