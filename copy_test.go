@@ -11,7 +11,7 @@ import (
 
 func TestCopyBytes(t *testing.T) {
 	// JSON data as bytes
-	src := []byte(`{"level": "debug", "event_timestamp": "2022-09-15T10:20:30Z", "msg": "the message", "caller": "the caller", "custom": "customVal", "array": ["foo", "bar"], "true": true, "false": false, "null": null}`)
+	src := []byte(`{"level": "debug", "event_timestamp": "2022-09-15T10:20:30Z", "msg": "the message", "caller": "the caller", "custom": "customVal", "array": ["foo", "bar"], "true": true, "false": false, "null": null, "float": 6.255089173237248, "number": 578}`)
 	buf := bytes.NewBuffer(make([]byte, 0, len(src)))
 	w := msgp.NewWriter(buf)
 

@@ -26,10 +26,6 @@ func CopyBytes(src []byte, w *msgp.Writer) error {
 		return err
 	}
 
-	if err := w.Flush(); err != nil {
-		return err
-	}
-
 	return nil
 }
 
@@ -41,15 +37,13 @@ func convertV(v *fastjson.Value, w *msgp.Writer) error {
 			return err
 		}
 
-		objV.Len()
-
 		err = w.WriteMapHeader(uint32(objV.Len()))
 		if err != nil {
 			return err
 		}
 
 		var visitErr error
-		objV.Visit(func(key []byte, v *fastjson.Value) {
+		objV.Visit(func(key []byte, vv *fastjson.Value) {
 			if visitErr != nil {
 				return
 			}
@@ -57,7 +51,7 @@ func convertV(v *fastjson.Value, w *msgp.Writer) error {
 			if err := w.WriteStringFromBytes(key); err != nil {
 				visitErr = err
 			}
-			if err := convertV(v, w); err != nil {
+			if err := convertV(vv, w); err != nil {
 				visitErr = err
 			}
 		})
@@ -72,8 +66,7 @@ func convertV(v *fastjson.Value, w *msgp.Writer) error {
 			return err
 		}
 
-		sz := uint32(len(items))
-		err = w.WriteArrayHeader(sz)
+		err = w.WriteArrayHeader(uint32(len(items)))
 		if err != nil {
 			return err
 		}
